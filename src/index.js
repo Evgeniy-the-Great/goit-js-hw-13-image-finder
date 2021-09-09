@@ -1,7 +1,8 @@
 import refs from './js/Refs';
 import cardMarkup from './tamplates/cardMarcup.hbs';
 import * as basicLightbox from 'basiclightbox';
-import 'basicLightbox/dist/basicLightbox.min.css';
+// import 'basicLightbox/dist/basicLightbox.min.css';
+import './sass/basicLightbox.min.css'
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
