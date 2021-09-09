@@ -1,9 +1,13 @@
 import refs from './js/Refs';
 import cardMarkup from './tamplates/cardMarcup.hbs';
-// @import 'src/styles/main';
+import * as basicLightbox from 'basiclightbox';
+import 'basicLightbox/dist/basicLightbox.min.css';
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
+refs.list.addEventListener('click', onPictureClick);
+window.addEventListener('scroll', trackScroll);
+refs.goTopBtn.addEventListener('click', backToTop);
 
 let page = 1;
 
@@ -36,8 +40,6 @@ function incrementPage () {
   page += 1;
 };
 
-console.log(refs.form);
-
 function onLoadMoreBtnClick() {
   incrementPage();
   const BASE_URL = 'https://pixabay.com/api/';
@@ -55,6 +57,7 @@ function onLoadMoreBtnClick() {
     .then(data => {
       renderCard(data);
       refs.loadMoreBtn.classList.remove('is-hidden');
+      handleButtonClick();
     });
 
   function renderCard({ hits }) {
@@ -64,15 +67,39 @@ function onLoadMoreBtnClick() {
   }
 }
 
-// const hiddenElement = refs.loadMoreBtn;
-// const btn = refs.formBtn;
+const hiddenElement = refs.loadMoreBtn;
+const btn = refs.formBtn;
 
-// function handleButtonClick() {
-//   hiddenElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
-// }
-// btn.addEventListener('click', handleButtonClick);
+function handleButtonClick() {
+  hiddenElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
+}
 
-// const instance = basicLightbox.create(`
-// 	<h1>Dynamic Content</h1>
-// 	<p>You can set the content of the lightbox with JS.</p>
-// `);
+function onPictureClick(e) {
+  if (!e.target.classList.contains('card-img')) {
+    return;
+  }
+  
+  const instance = basicLightbox.create(`
+    <img src="${e.target.dataset.largeImg}" width="800" height="600">
+  `);
+  instance.show();
+}
+
+function trackScroll() {
+  const scrolled = window.pageYOffset;
+  const coords = document.documentElement.clientHeight;
+
+  if (scrolled > coords) {
+    refs.goTopBtn.classList.add('back_to_top-show');
+  }
+  if (scrolled < coords) {
+    refs.goTopBtn.classList.remove('back_to_top-show');
+  }
+}
+
+function backToTop() {
+  if (window.pageYOffset > 0) {
+    window.scrollBy(0, -80);
+    setTimeout(backToTop, 0);
+  }
+}

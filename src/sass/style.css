@@ -59,7 +59,7 @@
 img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 250px;
 }
 
 .item {
@@ -77,4 +77,28 @@ img {
 .photo-card:hover{
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.back_to_top {
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+  z-index: 9999;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 30px;
+  background-color: tomato;
+  color: #444;
+  cursor: pointer;
+  border-radius: 35%;
+  display: none;
+}
+
+.back_to_top:hover {
+  background: #48a7d6;
+}
+
+.back_to_top-show {
+  display: block;
 }
