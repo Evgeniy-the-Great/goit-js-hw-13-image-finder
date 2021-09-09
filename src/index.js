@@ -14,6 +14,10 @@ let page = 1;
 function onFormSubmit(e) {
   e.preventDefault();
   const value = e.currentTarget.elements.query.value;
+  if (!value) {
+    refs.loadMoreBtn.classList.add('is-hidden');
+    return refs.list.innerHTML='';
+  }
   const BASE_URL = 'https://pixabay.com/api/';
   const queryParam = new URLSearchParams({
     key: '23292675-06f406722274daa99671b1028',
