@@ -1,5 +1,6 @@
 import refs from './js/Refs';
 import cardMarkup from './tamplates/cardMarcup.hbs';
+// @import 'src/styles/main';
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
@@ -62,3 +63,16 @@ function onLoadMoreBtnClick() {
       
   }
 }
+
+// const hiddenElement = refs.loadMoreBtn;
+// const btn = refs.formBtn;
+
+// function handleButtonClick() {
+//   hiddenElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
+// }
+// btn.addEventListener('click', handleButtonClick);
+
+// const instance = basicLightbox.create(`
+// 	<h1>Dynamic Content</h1>
+// 	<p>You can set the content of the lightbox with JS.</p>
+// `);
